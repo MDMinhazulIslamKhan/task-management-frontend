@@ -1,6 +1,8 @@
 "use client";
 import formatDate from "@/helpers/dateFormet/dateFormet";
 import {
+  useAcceptTaskMutation,
+  useCancelTaskMutation,
   useCompleteTaskMutation,
   useDeleteFeedbackMutation,
   useGetSingleTaskQuery,
@@ -13,6 +15,8 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
   const [deleteFeedback] = useDeleteFeedbackMutation(undefined);
   const [postFeedback] = usePostFeedbackMutation(undefined);
   const [taskComplete] = useCompleteTaskMutation(undefined);
+  const [acceptAssignedTask] = useAcceptTaskMutation(undefined);
+  const [cancelAssignedTask] = useCancelTaskMutation(undefined);
 
   const { data, isLoading } = useGetSingleTaskQuery(params.id);
   const deleteMyFeedback = async () => {
@@ -33,6 +37,24 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
       }
     } else return;
   };
+  const acceptTask = async () => {
+    const ans = window.confirm("Are you sure to accept this task?");
+    if (ans) {
+      const res = await acceptAssignedTask(data?.data?._id);
+      if (res?.data?.statusCode == 200) {
+        window.alert(res?.data?.message);
+      }
+    } else return;
+  };
+  const cancelTask = async () => {
+    const ans = window.confirm("Are you sure to cancel this assigned task?");
+    if (ans) {
+      const res = await cancelAssignedTask(data?.data?._id);
+      if (res?.data?.statusCode == 200) {
+        window.alert(res?.data?.message);
+      }
+    } else return;
+  };
   const submitFeedback = async (e: any) => {
     const feedback = e.target.feedback.value;
     e.preventDefault();
@@ -47,6 +69,7 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
       }
     } else return;
   };
+  console.log(data?.data?.assigned?.status);
   return (
     <div>
       <h1 className="text-center my-5 text-2xl font-bold">
@@ -69,7 +92,6 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
             Complete Task
           </button>
         )}
-
         <p className="mb-3">
           <span className="font-semibold">Description: </span>
           {data?.data?.description}
@@ -101,6 +123,42 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
           <span className="font-semibold">Total Task Created: </span>
           {data?.data?.creatorId?.createdTask}
         </p>
+        {data?.data?.assigned && (
+          <>
+            <h1 className="text-center font-bold font-serif sm:text-lg mt-4 my-8">
+              Assigned
+            </h1>
+            <p className="mb-3">
+              <span className="font-semibold">Name: </span>
+              {data?.data?.assigned?.userId?.fullName}
+            </p>
+            <p className="mb-3">
+              <span className="font-semibold">Email: </span>
+              {data?.data?.assigned?.userId?.email}
+            </p>
+            <p className="mb-3">
+              <span className="font-semibold">Status: </span>
+              {data?.data?.assigned?.status}
+            </p>
+            {data?.data?.assigned?.status == "process" &&
+              data?.data?.assigned?.userId?._id == getUserInfo()!.id && (
+                <>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => acceptTask()}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className="btn btn-secondary btn-sm ml-10"
+                    onClick={() => cancelTask()}
+                  >
+                    Cancel
+                  </button>
+                </>
+              )}
+          </>
+        )}
         <h1 className="text-center font-bold font-serif sm:text-lg mt-4 my-8">
           Completed By
           {data?.data?.completedBy?.length == 0

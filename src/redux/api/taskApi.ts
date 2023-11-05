@@ -25,6 +25,15 @@ export const taskApi: any = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.task],
     }),
+    getMyAssignedTasks: build.query({
+      query: () => {
+        return {
+          url: `${TASK_URL}/get-my-task`,
+          method: "GET",
+        };
+      },
+      providesTags: [tagTypes.task],
+    }),
     getSingleTask: build.query({
       query: (id: string) => ({
         url: `${TASK_URL}/${id}`,
@@ -54,14 +63,31 @@ export const taskApi: any = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.task],
     }),
+    acceptTask: build.mutation({
+      query: (id) => ({
+        url: `${TASK_URL}/accept-assigned-task/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.task],
+    }),
+    cancelTask: build.mutation({
+      query: (id) => ({
+        url: `${TASK_URL}/cancel-assigned-task/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.task],
+    }),
   }),
 });
 
 export const {
   useGetAllTasksQuery,
+  useGetMyAssignedTasksQuery,
   useGetSingleTaskQuery,
   useDeleteFeedbackMutation,
   usePostFeedbackMutation,
   useCompleteTaskMutation,
+  useAcceptTaskMutation,
+  useCancelTaskMutation,
   useGetAllMyCreatedTasksQuery,
 } = taskApi;

@@ -125,24 +125,26 @@ const AllTask = () => {
             </tbody>
           )}
         </table>
-        <div className="mt-10 w-full flex justify-center">
-          <div>
-            <span>Page No: </span>
-            <div className="join">{renderPageButtons()}</div>
+        {data?.data?.length != 0 && (
+          <div className="mt-10 w-full flex justify-center">
+            <div>
+              <span>Page No: </span>
+              <div className="join">{renderPageButtons()}</div>
+            </div>
+            <div className="ml-5">
+              <select
+                className="select select-bordered select-sm ml-3 w-30"
+                onChange={(e) => setSize(+e.target.value)}
+              >
+                <option value="5 ">5</option>
+                <option selected value="10">
+                  10
+                </option>
+                <option value="15">15</option>
+              </select>
+            </div>
           </div>
-          <div className="ml-5">
-            <select
-              className="select select-bordered select-sm ml-3 w-30"
-              onChange={(e) => setSize(+e.target.value)}
-            >
-              <option value="5 ">5</option>
-              <option selected value="10">
-                10
-              </option>
-              <option value="15">15</option>
-            </select>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
