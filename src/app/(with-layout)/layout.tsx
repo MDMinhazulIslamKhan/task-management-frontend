@@ -14,7 +14,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
   }, [router]);
   return (
     <DashboardSidebar>
-      <div className="h-screen">{children}</div>
+      <div className="min-h-screen">{children}</div>
     </DashboardSidebar>
   );
 };

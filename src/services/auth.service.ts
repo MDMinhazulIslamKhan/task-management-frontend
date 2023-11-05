@@ -6,13 +6,17 @@ export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
   return setToLocalStorage(authKey, accessToken as string);
 };
 
-export const getUserInfo = () => {
+export const getUserInfo = (): {
+  id: string;
+  email: string;
+  role: string;
+} | null => {
   const authToken = getFromLocalStorage(authKey);
   if (authToken) {
     const decodedData = decodedToken(authToken);
     return decodedData;
   } else {
-    return "";
+    return null;
   }
 };
 
