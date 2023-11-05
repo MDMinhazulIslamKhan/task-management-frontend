@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/Providers";
+import Header from "@/components/ui/Header";
 
 export const metadata: Metadata = {
   title: "Task Management",
@@ -16,7 +16,10 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body>{children}</body>
+        <div>
+          <Header />
+        </div>
+        <body className="pt-20 min-h-screen">{children}</body>
       </html>
     </Providers>
   );

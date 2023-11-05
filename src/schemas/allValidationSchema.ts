@@ -2,17 +2,12 @@ import * as yup from "yup";
 
 export const loginSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
-  password: yup.string().min(6).max(32).required("Password is required"),
+  password: yup.string().min(3).max(15).required("Password is required"),
 });
 
 export const passwordUpdateSchema = yup.object().shape({
-  oldPassword: yup.string().min(6).max(32).required("Password is required"),
-  newPassword: yup.string().min(6).max(32).required("Password is required"),
-});
-
-export const reviewSchema = yup.object().shape({
-  review: yup.string().required("Review is required"),
-  rating: yup.string().required("Rating is required"),
+  oldPassword: yup.string().min(3).max(15).required("Password is required"),
+  newPassword: yup.string().min(3).max(15).required("Password is required"),
 });
 
 export const feedbackSchema = yup.object().shape({
@@ -21,7 +16,7 @@ export const feedbackSchema = yup.object().shape({
 
 export const registrationSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
-  password: yup.string().min(6).max(32).required("Password is required"),
+  password: yup.string().min(3).max(15).required("Password is required"),
   fullName: yup.string().min(6).max(32).required("Name is required"),
   phoneNumber: yup
     .string()
