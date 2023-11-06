@@ -1,5 +1,5 @@
 "use client";
-import formatDate from "@/helpers/dateFormet/dateFormet";
+import formatDate from "@/helpers/dateFormat/dateFormat";
 import { useGetMyAssignedTasksQuery } from "@/redux/api/taskApi";
 import Link from "next/link";
 

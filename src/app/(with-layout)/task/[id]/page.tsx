@@ -1,5 +1,5 @@
 "use client";
-import formatDate from "@/helpers/dateFormet/dateFormet";
+import formatDate from "@/helpers/dateFormat/dateFormat";
 import {
   useAcceptTaskMutation,
   useCancelTaskMutation,
@@ -131,7 +131,7 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
         </p>
         <p className="mb-3">
           <span className="font-semibold">Phone: </span>
-          {data?.data?.creatorId?.email}
+          {data?.data?.creatorId?.phoneNumber}
         </p>
         <p className="mb-3">
           <span className="font-semibold">Total Task Created: </span>

@@ -21,6 +21,15 @@ export const registrationSchema = yup.object().shape({
     .required("Phone Number is required"),
 });
 
+export const updateProfileSchema = yup.object().shape({
+  fullName: yup.string().min(6).max(32).required("Name is required"),
+  phoneNumber: yup
+    .string()
+    .min(11)
+    .max(14)
+    .required("Phone Number is required"),
+});
+
 export const createTaskSchema = yup.object().shape({
   name: yup.string().min(6).max(32).required("Task name is required"),
   description: yup.string().min(6).required("Description is required"),
