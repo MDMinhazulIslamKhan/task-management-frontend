@@ -47,6 +47,7 @@ const Login = () => {
                 name="email"
                 type="email"
                 label="User Email"
+                placeholder="aaa@gmail.com"
                 required
               />
             </div>
@@ -54,7 +55,7 @@ const Login = () => {
               <PassWordInput
                 name="password"
                 label="Password"
-                placeholder="adasd"
+                placeholder="123456"
               />
             </div>
             <div className="form-control mt-6">

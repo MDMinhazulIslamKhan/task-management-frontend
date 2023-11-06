@@ -234,7 +234,7 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
           <div className="flex justify-evenly w-1/2 mx-auto mt-20">
             <Link
               className="btn btn-secondary btn-sm"
-              href="/dashboard/edit-task"
+              href={`/edit-task/${data?.data?._id}`}
             >
               Edit Task
             </Link>

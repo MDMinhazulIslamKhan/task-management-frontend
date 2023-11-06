@@ -13,6 +13,14 @@ export const taskApi: any = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.task, tagTypes.user],
     }),
+    updateTask: build.mutation({
+      query: (data) => ({
+        url: `${TASK_URL}/${data.id}`,
+        method: "PATCH",
+        data: data.data,
+      }),
+      invalidatesTags: [tagTypes.task, tagTypes.user],
+    }),
     getAllTasks: build.query({
       query: (arg: Record<string, any>) => {
         return {
@@ -106,5 +114,6 @@ export const {
   useCancelTaskMutation,
   useDeleteTaskMutation,
   useCreateTaskMutation,
+  useUpdateTaskMutation,
   useGetAllMyCreatedTasksQuery,
 } = taskApi;

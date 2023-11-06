@@ -71,11 +71,7 @@ const Registration = () => {
               />
             </div>
             <div className="form-control w-full max-w-xs">
-              <PassWordInput
-                name="password"
-                label="Password"
-                placeholder="adasd"
-              />
+              <PassWordInput name="password" label="Password" />
             </div>
             <div className="form-control mt-6">
               <button
