@@ -5,6 +5,14 @@ const TASK_URL = "/task";
 
 export const taskApi: any = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    createTask: build.mutation({
+      query: (data) => ({
+        url: `${TASK_URL}/create`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: [tagTypes.task, tagTypes.user],
+    }),
     getAllTasks: build.query({
       query: (arg: Record<string, any>) => {
         return {
@@ -77,6 +85,13 @@ export const taskApi: any = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.task],
     }),
+    deleteTask: build.mutation({
+      query: (id) => ({
+        url: `${TASK_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.task],
+    }),
   }),
 });
 
@@ -89,5 +104,7 @@ export const {
   useCompleteTaskMutation,
   useAcceptTaskMutation,
   useCancelTaskMutation,
+  useDeleteTaskMutation,
+  useCreateTaskMutation,
   useGetAllMyCreatedTasksQuery,
 } = taskApi;

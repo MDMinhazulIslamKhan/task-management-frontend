@@ -4,23 +4,13 @@ import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 import { useFormContext, Controller } from "react-hook-form";
 interface IInput {
   name: string;
-  type?: string;
   value?: string | string[] | undefined;
-  placeholder?: string;
   label?: string;
   required?: boolean;
   size?: "md" | "sm";
 }
 
-const FormInput = ({
-  name,
-  type,
-  value,
-  placeholder,
-  label,
-  size,
-  required,
-}: IInput) => {
+const FormDatePicker = ({ name, value, label, size, required }: IInput) => {
   const {
     control,
     formState: { errors },
@@ -41,8 +31,7 @@ const FormInput = ({
         name={name}
         render={({ field }) => (
           <input
-            type={type}
-            placeholder={placeholder}
+            type="date"
             {...field}
             value={value ? value : field.value}
             className={`input input-bordered w-full ${
@@ -56,4 +45,4 @@ const FormInput = ({
   );
 };
 
-export default FormInput;
+export default FormDatePicker;

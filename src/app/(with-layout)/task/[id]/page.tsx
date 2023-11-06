@@ -5,19 +5,23 @@ import {
   useCancelTaskMutation,
   useCompleteTaskMutation,
   useDeleteFeedbackMutation,
+  useDeleteTaskMutation,
   useGetSingleTaskQuery,
   usePostFeedbackMutation,
 } from "@/redux/api/taskApi";
 import { getUserInfo } from "@/services/auth.service";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const TaskDetails = ({ params }: { params: { id: string } }) => {
+  const router = useRouter();
   const [deleteFeedback] = useDeleteFeedbackMutation(undefined);
   const [postFeedback] = usePostFeedbackMutation(undefined);
   const [taskComplete] = useCompleteTaskMutation(undefined);
   const [acceptAssignedTask] = useAcceptTaskMutation(undefined);
   const [cancelAssignedTask] = useCancelTaskMutation(undefined);
-
+  const [deleteOwnTask] = useDeleteTaskMutation(undefined);
   const { data, isLoading } = useGetSingleTaskQuery(params.id);
   const deleteMyFeedback = async () => {
     const ans = window.confirm("Are you sure to delete your feedback?");
@@ -55,6 +59,17 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
       }
     } else return;
   };
+  const deleteTask = async () => {
+    const ans = window.confirm("Are you sure to delete this task?");
+    if (ans) {
+      const res = await deleteOwnTask(data?.data?._id);
+      console.log(res);
+      if (res?.data?.statusCode == 200) {
+        window.alert(res?.data?.message);
+        router.push("/dashboard");
+      }
+    } else return;
+  };
   const submitFeedback = async (e: any) => {
     const feedback = e.target.feedback.value;
     e.preventDefault();
@@ -69,7 +84,6 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
       }
     } else return;
   };
-  console.log(data?.data?.assigned?.status);
   return (
     <div>
       <h1 className="text-center my-5 text-2xl font-bold">
@@ -215,6 +229,22 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
               </button>
             </form>
           </>
+        )}
+        {data?.data?.creatorId?._id == getUserInfo()!.id && (
+          <div className="flex justify-evenly w-1/2 mx-auto mt-20">
+            <Link
+              className="btn btn-secondary btn-sm"
+              href="/dashboard/edit-task"
+            >
+              Edit Task
+            </Link>
+            <button
+              className="btn btn-accent btn-sm"
+              onClick={() => deleteTask()}
+            >
+              Delete Task
+            </button>
+          </div>
         )}
       </div>
     </div>

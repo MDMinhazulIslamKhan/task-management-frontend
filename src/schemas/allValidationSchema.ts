@@ -10,10 +10,6 @@ export const passwordUpdateSchema = yup.object().shape({
   newPassword: yup.string().min(3).max(15).required("Password is required"),
 });
 
-export const feedbackSchema = yup.object().shape({
-  feedback: yup.string().required("Feedback is required"),
-});
-
 export const registrationSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
   password: yup.string().min(3).max(15).required("Password is required"),
@@ -25,36 +21,9 @@ export const registrationSchema = yup.object().shape({
     .required("Phone Number is required"),
 });
 
-export const bookingSchema = yup.object().shape({
-  dayPerWeek: yup.number().min(1).max(7).required("Day per week is required"),
-  maxSalary: yup.number().min(500).required("Max Salary is required"),
-  location: yup.string().required("Location is required"),
-  description: yup.string().required("Description is required"),
-});
-
-export const registrationTutorSchema = yup.object().shape({
-  email: yup.string().email().required("Email is required"),
-  password: yup.string().min(6).max(32).required("Password is required"),
-  fullName: yup.string().min(6).max(32).required("Name is required"),
-  dayPerWeek: yup.number().min(1).max(7).required("Day Per Week is required"),
-  expectedMinSalary: yup
-    .number()
-    .min(500)
-    .max(15000)
-    .required("Expected Salary is required"),
-  maximumTuitionCapacity: yup
-    .number()
-    .min(1)
-    .max(15)
-    .required("Max Tuition Capacity is required"),
-  currentTuition: yup
-    .number()
-    .min(0)
-    .max(15)
-    .required("Current Tuition No is required"),
-  phoneNumber: yup
-    .string()
-    .min(11)
-    .max(14)
-    .required("Phone Number is required"),
+export const createTaskSchema = yup.object().shape({
+  name: yup.string().min(6).max(32).required("Task name is required"),
+  description: yup.string().min(6).required("Description is required"),
+  deadLine: yup.string().required("DeadLine is required"),
+  category: yup.string().required("Category is required"),
 });

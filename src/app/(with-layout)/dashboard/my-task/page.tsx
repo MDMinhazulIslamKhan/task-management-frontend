@@ -1,41 +1,9 @@
 "use client";
 import formatDate from "@/helpers/dateFormet/dateFormet";
-import {
-  useGetAllTasksQuery,
-  useGetMyAssignedTasksQuery,
-} from "@/redux/api/taskApi";
-import { useDebounced } from "@/redux/hooks";
+import { useGetMyAssignedTasksQuery } from "@/redux/api/taskApi";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 const MyTask = () => {
-  const query: Record<string, any> = {};
-  const [pageNo, setPageNo] = useState<number>(1);
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [size, setSize] = useState<number>(10);
-  const [category, setCategory] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<string>("");
-  const [sortOrder, setSortOrder] = useState<string>("");
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  query["limit"] = size;
-  query["page"] = pageNo;
-  query["sortBy"] = sortBy;
-  query["sortOrder"] = sortOrder;
-
-  if (!!category) {
-    query["category"] = category;
-  }
-
-  const debouncedSearchTerm = useDebounced({
-    searchQuery: searchTerm,
-    delay: 300,
-  });
-
-  if (!!debouncedSearchTerm) {
-    query["searchTerm"] = debouncedSearchTerm;
-  }
-
   const { data, isLoading } = useGetMyAssignedTasksQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });

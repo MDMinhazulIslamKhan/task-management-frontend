@@ -1,25 +1,29 @@
 "use client";
+export type SelectOptions = {
+  label: string;
+  value: string;
+};
 
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 import { useFormContext, Controller } from "react-hook-form";
 interface IInput {
   name: string;
-  type?: string;
   value?: string | string[] | undefined;
   placeholder?: string;
   label?: string;
   required?: boolean;
   size?: "md" | "sm";
+  options: SelectOptions[];
 }
 
-const FormInput = ({
+const FromSelectInput = ({
   name,
-  type,
   value,
+  options,
   placeholder,
   label,
-  size,
   required,
+  size,
 }: IInput) => {
   const {
     control,
@@ -39,16 +43,21 @@ const FormInput = ({
       <Controller
         control={control}
         name={name}
-        render={({ field }) => (
-          <input
-            type={type}
+        render={({ field: { value, onChange } }) => (
+          <select
             placeholder={placeholder}
-            {...field}
-            value={value ? value : field.value}
+            onChange={(e) => onChange(e.target.value)}
+            value={value}
             className={`input input-bordered w-full ${
               size == "md" ? "max-w-md" : "max-w-xs"
             }`}
-          />
+          >
+            {options.map((option) => (
+              <>
+                <option value={option.value}>{option.label}</option>
+              </>
+            ))}
+          </select>
         )}
       />
       <small style={{ color: "red" }}>{errorMessage}</small>
@@ -56,4 +65,4 @@ const FormInput = ({
   );
 };
 
-export default FormInput;
+export default FromSelectInput;

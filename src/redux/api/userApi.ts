@@ -21,7 +21,20 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    getAllUser: build.query({
+      query: () => {
+        return {
+          url: `${USER_URL}/get-all-users`,
+          method: "GET",
+        };
+      },
+      providesTags: [tagTypes.task, tagTypes.user],
+    }),
   }),
 });
 
-export const { useUserLoginMutation, useUserRegistrationMutation } = userApi;
+export const {
+  useUserLoginMutation,
+  useUserRegistrationMutation,
+  useGetAllUserQuery,
+} = userApi;
