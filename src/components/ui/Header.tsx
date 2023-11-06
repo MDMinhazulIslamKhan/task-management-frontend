@@ -34,7 +34,7 @@ const Header = () => {
             <div onClick={logout}>
               <p className="absolute">{isLoggedIn() ? "Logout" : "Login"}</p>
               <p className="relative top-7 text-[10px] opacity-40">
-                {isLoggedIn() && "change name"}
+                {isLoggedIn() && " "}
               </p>
             </div>
           </li>
@@ -103,7 +103,7 @@ const Header = () => {
                     {isLoggedIn() ? "Logout" : "Login"}
                   </p>
                   <p className="relative top-7 text-[10px] opacity-40">
-                    {isLoggedIn() && "change name"}
+                    {isLoggedIn() && " "}
                   </p>
                 </div>
               </li>
