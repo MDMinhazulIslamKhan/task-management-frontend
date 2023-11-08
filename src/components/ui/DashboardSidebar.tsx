@@ -1,7 +1,12 @@
+import { useGetMyProfileQuery } from "@/redux/api/userApi";
 import Link from "next/link";
 import React from "react";
 
 const DashboardSidebar = ({ children }: { children: React.ReactNode }) => {
+  const { data } = useGetMyProfileQuery(undefined, {
+    pollingInterval: 10000,
+  });
+
   return (
     <div className="drawer drawer-mobile sm:drawer-open  h-full">
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
@@ -40,6 +45,11 @@ const DashboardSidebar = ({ children }: { children: React.ReactNode }) => {
           <li>
             <Link href="/dashboard/my-task" className="hover:text-primary">
               Assigned task to me
+              {data?.data?.notification != 0 && (
+                <span className="text-[10px] text-center items-center bg-gray-200 w-4 rounded-full">
+                  {data?.data?.notification}
+                </span>
+              )}
             </Link>
           </li>
           <li>

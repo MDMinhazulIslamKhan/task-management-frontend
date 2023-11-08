@@ -39,7 +39,6 @@ const EditTask = ({ params }: { params: { id: string } }) => {
     const ans = window.confirm("Are you sure to edit this task?");
     if (ans) {
       const res = await editTask({ data: updatedData, id: data?._id });
-      console.log(res);
       if (res?.data?.statusCode == 200) {
         window.alert(res?.data?.message);
         router.push(`/task/${data?._id}`);

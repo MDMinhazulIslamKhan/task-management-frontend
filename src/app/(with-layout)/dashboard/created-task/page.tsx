@@ -91,7 +91,7 @@ const MyCreatedAllTask = () => {
       </div>
       <div className="overflow-x-auto px-5">
         <table className="table-pin-rows table w-full">
-          <thead>
+          <tbody className="bg-base-100">
             <tr>
               <th></th>
               <th>Task Name</th>
@@ -99,7 +99,7 @@ const MyCreatedAllTask = () => {
               <th>Deadline</th>
               <th>Action</th>
             </tr>
-          </thead>
+          </tbody>
           {data?.data?.length == 0 ? (
             <p className="text-center text-xl my-8">No Task Available</p>
           ) : (
@@ -109,7 +109,10 @@ const MyCreatedAllTask = () => {
                   <>
                     <tr>
                       <th>{index + 1}</th>
-                      <td>{task.name.slice(0, 20)}</td>{" "}
+                      <td>
+                        {task.name.slice(0, 20)}
+                        {task.name.length > 20 && "..."}
+                      </td>
                       <td>{task?.category}</td>
                       <td>{formatDate(task?.deadLine)}</td>
                       <td>

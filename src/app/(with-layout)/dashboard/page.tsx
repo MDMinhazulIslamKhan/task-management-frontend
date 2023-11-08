@@ -88,7 +88,7 @@ const AllTask = () => {
       </div>
       <div className="overflow-x-auto px-5">
         <table className="table-pin-rows table w-full">
-          <thead>
+          <tbody className="bg-base-100">
             <tr>
               <th></th>
               <th>Task Name</th>
@@ -97,7 +97,7 @@ const AllTask = () => {
               <th>Deadline</th>
               <th>Action</th>
             </tr>
-          </thead>
+          </tbody>
           {data?.data?.length == 0 ? (
             <p className="text-center text-xl my-8">No Task Available</p>
           ) : (
@@ -107,7 +107,10 @@ const AllTask = () => {
                   <>
                     <tr>
                       <th>{index + 1}</th>
-                      <td>{task.name.slice(0, 20)}</td>
+                      <td>
+                        {task.name.slice(0, 20)}
+                        {task.name.length > 20 && "..."}
+                      </td>
                       <td>{task?.creatorId?.fullName.slice(0, 10)}</td>
                       <td>{task?.category}</td>
                       <td>{formatDate(task?.deadLine)}</td>
@@ -134,7 +137,10 @@ const AllTask = () => {
             <div className="ml-5">
               <select
                 className="select select-bordered select-sm ml-3 w-30"
-                onChange={(e) => setSize(+e.target.value)}
+                onChange={(e) => {
+                  setSize(+e.target.value);
+                  setPageNo(1);
+                }}
               >
                 <option value="5 ">5</option>
                 <option selected value="10">

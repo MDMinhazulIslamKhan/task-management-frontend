@@ -6,7 +6,6 @@ import React from "react";
 
 const MyProfile = () => {
   const { data, isLoading } = useGetMyProfileQuery(undefined);
-  console.log(data);
   return (
     <div>
       <h1 className="text-center my-5 text-2xl font-bold">

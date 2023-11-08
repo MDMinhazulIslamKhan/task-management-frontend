@@ -26,7 +26,7 @@ const Header = () => {
             Task Management
           </p>
         </Link>
-        <ul className="list-none hidden sm:flex flex-row gap-4 md:gap-10">
+        <ul className="list-none hidden sm:flex mr-10 flex-row gap-4 md:gap-10">
           <li className="hover:text-secondary text-[18px] font-medium cursor-pointer text-white">
             <Link href="/about">About Us</Link>
           </li>

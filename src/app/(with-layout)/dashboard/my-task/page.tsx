@@ -17,7 +17,7 @@ const MyTask = () => {
       </h1>
       <div className="overflow-x-auto px-5">
         <table className="table-pin-rows table w-full">
-          <thead>
+          <tbody className="bg-base-100">
             <tr>
               <th></th>
               <th>Task Name</th>
@@ -26,9 +26,14 @@ const MyTask = () => {
               <th>Deadline</th>
               <th>Action</th>
             </tr>
-          </thead>
+          </tbody>
           {data?.data?.length == 0 ? (
-            <p className="text-center text-xl my-8">No Task Available</p>
+            <tr>
+              <td></td>
+              <td className="text-center text-lg text-gray-600 my-8">
+                No Task Available
+              </td>
+            </tr>
           ) : (
             <tbody>
               {data?.data?.map((task: any, index: number) => {
@@ -36,7 +41,10 @@ const MyTask = () => {
                   <>
                     <tr>
                       <th>{index + 1}</th>
-                      <td>{task.name.slice(0, 20)}</td>
+                      <td>
+                        {task.name.slice(0, 20)}
+                        {task.name.length > 20 && "..."}
+                      </td>
                       <td>{task?.creatorId?.fullName.slice(0, 10)}</td>
                       <td>{task?.category}</td>
                       <td>{formatDate(task?.deadLine)}</td>

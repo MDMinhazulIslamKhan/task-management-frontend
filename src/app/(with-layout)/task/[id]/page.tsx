@@ -63,7 +63,6 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
     const ans = window.confirm("Are you sure to delete this task?");
     if (ans) {
       const res = await deleteOwnTask(data?.data?._id);
-      console.log(res);
       if (res?.data?.statusCode == 200) {
         window.alert(res?.data?.message);
         router.push("/dashboard");
@@ -100,7 +99,7 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
           (f: any) => f?._id == getUserInfo()!.id
         ) && (
           <button
-            className="btn btn-secondary absolute right-8 top-5 btn-sm"
+            className="btn btn-secondary md:absolute mb-7 right-8 top-5 btn-sm"
             onClick={() => completeTask()}
           >
             Complete Task
@@ -239,7 +238,7 @@ const TaskDetails = ({ params }: { params: { id: string } }) => {
               Edit Task
             </Link>
             <button
-              className="btn btn-accent btn-sm"
+              className="btn btn-secondary btn-sm"
               onClick={() => deleteTask()}
             >
               Delete Task

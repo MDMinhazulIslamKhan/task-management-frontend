@@ -24,8 +24,6 @@ const config: Config = {
           "base-100": "#ffffff",
         },
       },
-      "dark",
-      "cupcake",
     ],
   },
 };
