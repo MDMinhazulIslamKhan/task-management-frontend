@@ -8,7 +8,7 @@
 
 ---
 
-### **Requerment analysis - [_click here_](https://docs.google.com/document/d/19VdmRYnKdyV4vzuzAb0x4BTecCNzcznHKVlfpNs8PCQ/edit?usp=drive_link)**
+### **Requirement analysis - [_click here_](https://docs.google.com/document/d/19VdmRYnKdyV4vzuzAb0x4BTecCNzcznHKVlfpNs8PCQ/edit?usp=drive_link)**
 
 ### **ER Diagram - [_click here_](https://drive.google.com/file/d/1mFArNTr43_NQCOVOJR7U4WVW_x5eCJTj/view?usp=sharing)**
 
