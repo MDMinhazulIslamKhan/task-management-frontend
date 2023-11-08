@@ -7,9 +7,10 @@ interface IInput {
   name: string;
   placeholder?: string;
   label?: string;
+  size?: "md" | "sm";
 }
 
-const PassWordInput = ({ name, placeholder, label }: IInput) => {
+const PassWordInput = ({ name, placeholder, label, size }: IInput) => {
   const {
     control,
     formState: { errors },
@@ -72,7 +73,9 @@ const PassWordInput = ({ name, placeholder, label }: IInput) => {
             type={showPassword ? "text" : "password"}
             placeholder={placeholder}
             {...field}
-            className="input input-bordered w-full max-w-xs"
+            className={`input input-bordered w-full ${
+              size == "md" ? "max-w-md" : "max-w-xs"
+            }`}
           />
         )}
       />

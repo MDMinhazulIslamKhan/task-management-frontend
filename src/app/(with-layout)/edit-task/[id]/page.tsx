@@ -8,6 +8,8 @@ import {
   useUpdateTaskMutation,
   useGetSingleTaskQuery,
 } from "@/redux/api/taskApi";
+import { createTaskSchema } from "@/schemas/allValidationSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler } from "react-hook-form";
@@ -50,7 +52,11 @@ const EditTask = ({ params }: { params: { id: string } }) => {
       <h1 className="text-center my-5 text-2xl font-bold">Edit Tasks</h1>
       <div className="bg-white mx-5 rounded-lg p-5 min-h-screen flex justify-center">
         <div className="min-w-[50%]">
-          <Form submitHandler={onSubmit} defaultValues={data?.data}>
+          <Form
+            submitHandler={onSubmit}
+            defaultValues={data?.data}
+            resolver={yupResolver(createTaskSchema)}
+          >
             <div className="form-control w-md">
               <FormInput
                 name="name"
@@ -61,12 +67,7 @@ const EditTask = ({ params }: { params: { id: string } }) => {
               />
             </div>
             <div className="form-control w-md">
-              <FormDatePicker
-                name="deadLine"
-                label="Task Deadline"
-                size="md"
-                required
-              />
+              <FormDatePicker name="deadLine" label="Task Deadline" size="md" />
             </div>
             <div className="form-control max-w-md">
               <TextAreaInput
@@ -81,7 +82,6 @@ const EditTask = ({ params }: { params: { id: string } }) => {
                 name="category"
                 label="Task Category"
                 size="md"
-                required
               />
             </div>
             <div className="form-control w-md mt-6">

@@ -59,7 +59,6 @@ const UpdateProfile = () => {
                 type="text"
                 label="Updated Name"
                 size="md"
-                required
               />
             </div>
             <div className="form-control w-md">
@@ -68,7 +67,6 @@ const UpdateProfile = () => {
                 type="text"
                 label="Updated Phone Number"
                 size="md"
-                required
               />
             </div>
 

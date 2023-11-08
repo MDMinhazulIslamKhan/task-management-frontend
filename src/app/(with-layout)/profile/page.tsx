@@ -45,11 +45,14 @@ const MyProfile = () => {
           <span className="font-semibold">Total Completed Task: </span>
           {data?.data?.complectedTask}
         </p>
-        <Link href="/update-profile">
-          <button className="btn btn-primary btn-sm mt-8">
+        <div className="flex justify-evenly w-1/2 mx-auto mt-20">
+          <Link className="btn btn-secondary btn-sm" href="/update-profile">
             Update Profile
-          </button>
-        </Link>
+          </Link>
+          <Link className="btn btn-secondary btn-sm" href="/change-password">
+            Change Password
+          </Link>
+        </div>
       </div>
     </div>
   );
